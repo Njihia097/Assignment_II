@@ -2,6 +2,9 @@
 //modifications to the database
 //error handling
 
+include '../errors.php';
+session_start();
+
 class LoginContr extends Login{
 
     private $username;
@@ -17,11 +20,14 @@ class LoginContr extends Login{
 
     public function loginUser(){
         if($this->emptyInput() == false){
-            //echo Empty input!;
+            $error_code = 'emptyinput';
+            $_SESSION['login_error'] = $error_code;
             header("location: ../index.php?error=emptyinput");
             exit();
         }
         if($this->invalidUsername() == false){
+            $error_code = 'username';
+            $_SESSION['login_error'] = $error_code;
             header("location: ../index.php?error=username");
             exit();
         }

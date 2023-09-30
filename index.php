@@ -1,4 +1,5 @@
 <?php
+include 'errors.php';
 session_start();
 ?>
 
@@ -41,8 +42,32 @@ session_start();
             <!-- I added a background image to the container -->
             <div class="contained">
                 <h2>SIGN UP</h2>
+                <?php
+                // if (isset($_SESSION['error'])) {
+                //     $errors = $_SESSION['error'];
+                //     foreach ($errors as $error) {
+                //         echo '<span class="error-msg" style="color:red;">' . $error . '</span>';
+                //     }
+                //     // Clear the displayed errors from the session
+                //     // unset($_SESSION['error']);
+                // }
+                ?>
+
 
                <form action="includes/signup.inc.php" method="post" id="signup">
+               <?php
+                if (isset($_SESSION['signup_error'])) {
+                    $error_code = $_SESSION['signup_error'];
+                    if (array_key_exists($error_code, $errorMessages)) {
+                        $error_message = $errorMessages[$error_code];
+                        echo '<span class="error-msg" style="margin:10px 0; display:inline-block; background:crimson; color: #fff;
+                        border-radius:5px; font-size:20px; padding:10px; width:80%;">' . $error_message . '</span>';
+                    } 
+                    unset($_SESSION['signup_error']);
+                }  
+                    // Clear the displayed errors from the session
+                    // unset($_SESSION['error']);
+                ?>
                     <div class="form-group">
                         <input type="text" name="username" required>
                         <span></span>
@@ -79,6 +104,18 @@ session_start();
              <!-- <div class="contained"> -->
                 <h2>Login Here</h2>
                 <form  action="includes/login.inc.php" method="post" id="login">
+                <?php
+                if (isset($_SESSION['login_error'])) {
+                    $error_code = $_SESSION['login_error'];
+                    if (array_key_exists($error_code, $errorMessages)) {
+                        $error_message = $errorMessages[$error_code];
+                        echo '<span class="error-msg" style="margin:10px 0; display:inline-block; background:crimson; color: #fff;
+                        border-radius:5px; font-size:20px; padding:10px; width:80%;">' . $error_message . '</span>';
+                    } 
+                    unset($_SESSION['login_error']);
+                   
+                }  
+                ?>
                     
                     <div class="form-group">
                         <input type="text" name="username" required>

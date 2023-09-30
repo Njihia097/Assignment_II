@@ -1,6 +1,9 @@
 <?php
 //Database related staff i.e. querying
 
+include '../errors.php';
+session_start();
+
 class Login extends Dbh{
 
     protected function getUser($username, $pass){
@@ -13,6 +16,8 @@ class Login extends Dbh{
               exit();
         }
         if($stmt->rowCount() == 0){
+            $error_code = 'noneuseroremail';
+            $_SESSION['login_error'] = $error_code;
             $stmt = null;
             header('location: ../index.php?error=usernotfound');
             exit();
@@ -22,6 +27,8 @@ class Login extends Dbh{
         $checkPass = password_verify($pass, $hashedPass[0]["user_password"]);
 
         if($checkPass == false){
+            $error_code = 'wrongpassword';
+            $_SESSION['login_error'] = $error_code;
             $stmt = null;
             header("location: ../index.php?error=wrongpassword");
             exit();
@@ -35,6 +42,8 @@ class Login extends Dbh{
              }
 
               if($stmt->rowCount() == 0){
+                $error_code = 'noneuseroremail';
+                $_SESSION['login_error'] = $error_code;
                 $stmt = null;
                 header('location: ../index.php?error=usernotfound');
                 exit();

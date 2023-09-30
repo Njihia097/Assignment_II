@@ -1,6 +1,9 @@
 <?php
 //modifications to the database
 //error handling
+include '../errors.php';
+session_start();
+
 
 class SignupContr extends Signup{
 
@@ -19,24 +22,32 @@ class SignupContr extends Signup{
 
     public function signupUser(){
         if($this->emptyInput() == false){
-            //echo Empty input!;
+            $error_code = 'emptyinput';
+            $_SESSION['signup_error'] = $error_code;
             header("location: ../index.php?error=emptyinput");
             exit();
         }
         if($this->invalidUsername() == false){
+            $error_code = 'username';
+            $_SESSION['signup_error'] = $error_code;
             header("location: ../index.php?error=username");
             exit();
         }
         if($this->invalidEmail() == false){
+            $error_code =  'email';
+            $_SESSION['signup_error'] = $error_code;
             header("location: ../index.php?error=email");
             exit();
         }
         if($this->passMatch() == false){
+            $error_code = 'passwordmatch';
+            $_SESSION['signup_error'] = $error_code;
             header("location: ../index.php?error=passwordmatch");
             exit();
         }
         if($this->validateDetails() == false){
-           
+            $error_code = 'useroremailtaken'; 
+            $_SESSION['signup_error'] = $error_code;
             header("location: ../index.php?error=useroremailtaken");
             exit();
         }
