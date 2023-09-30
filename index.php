@@ -10,12 +10,12 @@ session_start();
     <!-- I added a favicon to your page -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <!-- I changed the style sheet to a different one -->
-    <link rel="stylesheet" href="css/newstyle.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Document</title>
 </head>
 <body>
     <nav>
-        <ul>
+        <ul class="navlist">
             <?php
             if(isset($_SESSION['user_id'])){
 
@@ -29,8 +29,8 @@ session_start();
             else{
 
             ?>
-            <li><a href="#"><i class="fas fa-user-plus"></i> SIGN UP</a></li>
-            <li><a href="#"><i class="fas fa-sign-in-alt"></i> LOGIN</a></li>
+            <li><a href="#signup"><i class="fas fa-user-plus"></i> SIGN UP</a></li>
+            <li><a href="#login"><i class="fas fa-sign-in-alt"></i> LOGIN</a></li>
             <?php
             }
             ?>
@@ -42,7 +42,7 @@ session_start();
             <div class="contained">
                 <h2>SIGN UP</h2>
 
-               <form action="includes/signup.inc.php" method="post">
+               <form action="includes/signup.inc.php" method="post" id="signup">
                     <div class="form-group">
                         <input type="text" name="username" required>
                         <span></span>
@@ -75,10 +75,10 @@ session_start();
                     </div>
                 </form>
                 
-            </div>
-            <div class="contained">
+            
+             <!-- <div class="contained"> -->
                 <h2>Login Here</h2>
-                <form  action="includes/login.inc.php" method="post">
+                <form  action="includes/login.inc.php" method="post" id="login">
                     
                     <div class="form-group">
                         <input type="text" name="username" required>
@@ -100,11 +100,6 @@ session_start();
             </div>
         </div>
     </section>
-    <!-- I added a footer to your page -->
-    <footer>
-        <p>© 2023 All rights reserved.</p>
-    </footer>
-    <!-- I added a script to load the font awesome icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    
 </body>
 </html>
